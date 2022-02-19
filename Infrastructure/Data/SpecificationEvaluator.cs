@@ -1,6 +1,6 @@
 using System.Linq;
 using Core.Entities;
-using Core.Specification;
+using Core.Specifications;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
@@ -26,7 +26,7 @@ namespace Infrastructure.Data
                 query = query.OrderByDescending(spec.OrderByDescending);
             }
 
-            if (spec.IsPagingEnable)
+            if (spec.IsPagingEnabled)
             {
                 query = query.Skip(spec.Skip).Take(spec.Take);
             }
