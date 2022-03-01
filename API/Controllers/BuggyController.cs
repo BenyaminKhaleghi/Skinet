@@ -17,14 +17,19 @@ namespace API.Controllers
             _context = context;
         }
 
+        [HttpGet("testauth")]
+        public ActionResult<string> GetSecretText()
+        {
+            return "secret stuff";
+        }
+
         [HttpGet("notfound")]
         public ActionResult GetNotFoundRequest()
         {
             var thing = _context.Products.Find(42);
-            if (thing == null)
-            {
-                return NotFound(new ApiResponse(404));
-            }
+
+            if (thing == null) return NotFound(new ApiResponse(404));
+
             return Ok();
         }
 
@@ -37,11 +42,13 @@ namespace API.Controllers
 
             return Ok();
         }
+
         [HttpGet("badrequest")]
         public ActionResult GetBadRequest()
         {
-            return Ok(new ApiResponse(400));
+            return BadRequest(new ApiResponse(400));
         }
+
         [HttpGet("badrequest/{id}")]
         public ActionResult GetNotFoundRequest(int id)
         {
